@@ -5,36 +5,14 @@ ini_set('error_log', 'php.log');
 
 session_start();
 
-class creature
-{
-  protected $name;
-  protected $img;
-  protected $hp;
-  protected $minAtkPoint;
-  protected $maxAtkPoint;
+require('class.php');
+require('function.php');
 
-  public function __construct($name, $img, $hp, $minAtkPoint, $maxAtkPoint)
-  {
-    $this->name = $name;
-    $this->img = $img;
-    $this->hp = $hp;
-    $this->minAtkPoint = $minAtkPoint;
-    $this->maxAtkPoint = $maxAtkPoint;
-  }
+$monsters[] = new Monsters('スライム', '', '100', 10, 20);
 
-  public function attack()
-  {
-    $atkPoint = mt_rand($this->minAtkPoint, $this->maxAtkPoint);
-    $_SESSION['playerHp'] -= $atkPoint;
-    $_SESSION['history'] .= $this->name . 'は' . $atkPoint . 'ポイントのダメージを与えた！';
-  }
+$monsterNum = count($monster);
 
-  public function defense()
-  {
-  }
-}
-
-
+createMonster();
 
 if (!empty($_POST)) {
   $attack_flg = (!empty($_POST['attack'])) ? true : false;
@@ -77,9 +55,6 @@ if (!empty($_POST)) {
       <form action="" method="post" class="b_commandUnit">
         <label class="b_command">
           <input type="submit" value="こうげき" name="attack">
-        </label><!-- /.b_command -->
-        <label class="b_command">
-          <input type="submit" value="ぼうぎょ" name="defense">
         </label><!-- /.b_command -->
         <label class="b_command">
           <input type="submit" value="にげる" name="runaway">
