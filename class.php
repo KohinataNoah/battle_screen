@@ -17,17 +17,31 @@ class Monsters
     $this->maxAtkPoint = $maxAtkPoint;
   }
 
+
+  public function getName()
+  {
+    return $this->name;
+  }
+
+  public function getImg()
+  {
+    return $this->img;
+  }
+
+  public function getHP()
+  {
+    return $this->hp;
+  }
+
+  public function setHP($str)
+  {
+    $this->hp = $str;
+  }
+
   public function attack()
   {
     $atkPoint = mt_rand($this->minAtkPoint, $this->maxAtkPoint);
     $_SESSION['playerHp'] -= $atkPoint;
     $_SESSION['history'] .= $this->name . 'は' . $atkPoint . 'ポイントのダメージを与えた！';
-  }
-
-  // public function setHP()
-
-  public function getName()
-  {
-    return $this->name;
   }
 }
