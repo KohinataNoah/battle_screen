@@ -23,4 +23,11 @@ class Monsters
     $_SESSION['playerHp'] -= $atkPoint;
     $_SESSION['history'] .= $this->name . 'は' . $atkPoint . 'ポイントのダメージを与えた！';
   }
+
+  // public function setHP()
+
+  public function getName()
+  {
+    return $this->name;
+  }
 }

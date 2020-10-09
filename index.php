@@ -5,19 +5,33 @@ ini_set('error_log', 'php.log');
 
 session_start();
 
+const PLAYER_HP = 500;
+
 require('class.php');
 require('function.php');
 
-$monsters[] = new Monsters('スライム', '', '100', 10, 20);
+$monsters[] = new Monsters('スライム', 'img/slime.jpg', '100', 10, 20);
+// $monsters[] = new Monsters('おおきづち','img/')
 
-$monsterNum = count($monster);
-
-createMonster();
+$monstersNum = count($monsters);
 
 if (!empty($_POST)) {
   $attack_flg = (!empty($_POST['attack'])) ? true : false;
-  $defense_flg = (!empty($_POST['defense'])) ? true : false;
   $escape_flg = (!empty($_POST['escape'])) ? true : false;
+  $restert_flg = (!empty($_POST['restert'])) ? true : false;
+
+  // こうげきしたとき
+  if ($attack_flg) {
+  }
+  // にげたとき
+  if ($escape_flg) {
+    $_SESSION['history'] .= 'にげた！<br>';
+  }
+
+  // ゲームリスタートしたとき
+  if ($restert_flg) {
+    createMonster();
+  }
 }
 
 ?>
@@ -58,6 +72,9 @@ if (!empty($_POST)) {
         </label><!-- /.b_command -->
         <label class="b_command">
           <input type="submit" value="にげる" name="runaway">
+        </label><!-- /.b_command -->
+        <label class="b_command">
+          <input type="submit" value="ゲームリスタート" name="restert">
         </label><!-- /.b_command -->
       </form><!-- /.b_commandUnit -->
     </div><!-- /.l_main_inner -->
