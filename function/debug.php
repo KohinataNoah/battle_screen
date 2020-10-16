@@ -1,6 +1,6 @@
 <?php
 
-$debug_flg = true;
+$debug_flg = false;
 
 function d($s)
 {
@@ -8,4 +8,9 @@ function d($s)
   if ($debug_flg) {
     error_log($s);
   }
+}
+
+function p($s)
+{
+  return print_r($s, true);
 }

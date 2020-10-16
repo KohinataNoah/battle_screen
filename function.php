@@ -4,11 +4,14 @@ require('function/debug.php');
 
 function createMonster()
 {
+  d('新しくモンスターを作成します。');
   global $monsters, $monstersNum;
-  $_SESSION['monster'] = '';
   $monster = $monsters[mt_rand(0, $monstersNum - 1)];
   $_SESSION['monster'] = $monster;
-  $_SESSION['history'] = $monster->getName() . 'が現れた！';
+  d('モンスター：' . p($_SESSION['monster']));
+  $_SESSION['historyOld'][] = $_SESSION['history'];
+  History::clear();
+  History::set($monster->getName() . 'が現れた！');
 }
 
 function gameOver()
@@ -18,8 +21,9 @@ function gameOver()
 
 function init()
 {
-  $_SESSION['history'] = 'ゲームスタート！';
+  History::clearAll();
+  History::set('ゲームスタート！', '　');
   $_SESSION['knockDownNum'] = 0;
-  $_SESSION['playerHP'] = PLAYER_HP;
+  $_SESSION['playerHP'] = 500;
   createMonster();
 }
